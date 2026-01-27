@@ -1,0 +1,693 @@
+# Mutation Testing Diffs
+# Source: lib/kernel/scan/line_span_generator.cpp
+# Total Mutants: 100
+
+# Mutant 001
+@@ -30,31 +30,31 @@
+     b.CreateStore(endIdx, endStorePtr);
+-b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
++b.setScalarField("lineBegin", b.CreateSub(endIdx, b.getInt64(1)));
+     b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
+
+# Mutant 002
+@@ -30,31 +30,31 @@
+     b.CreateStore(endIdx, endStorePtr);
+-b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
++b.setScalarField("lineBegin", b.CreateMul(endIdx, b.getInt64(1)));
+     b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
+
+# Mutant 003
+@@ -30,31 +30,31 @@
+     b.CreateStore(endIdx, endStorePtr);
+-b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
++b.setScalarField("lineBegin", b.CreateUDiv(endIdx, b.getInt64(1)));
+     b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
+
+# Mutant 004
+@@ -30,31 +30,31 @@
+     b.CreateStore(endIdx, endStorePtr);
+-b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
++b.setScalarField("lineBegin", b.CreateURem(endIdx, b.getInt64(1)));
+     b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
+
+# Mutant 005
+@@ -31,32 +31,32 @@
+     b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
+-b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
++b.setProducedItemCount("output", b.CreateSub(producedCount, b.getSize(1)));
+ }
+
+# Mutant 006
+@@ -31,32 +31,32 @@
+     b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
+-b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
++b.setProducedItemCount("output", b.CreateMul(producedCount, b.getSize(1)));
+ }
+
+# Mutant 007
+@@ -31,32 +31,32 @@
+     b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
+-b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
++b.setProducedItemCount("output", b.CreateUDiv(producedCount, b.getSize(1)));
+ }
+
+# Mutant 008
+@@ -31,32 +31,32 @@
+     b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
+-b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
++b.setProducedItemCount("output", b.CreateURem(producedCount, b.getSize(1)));
+ }
+
+# Mutant 009
+@@ -98,99 +98,99 @@
+     b.CreateStore(endVal, b.getRawOutputPointer("output", i64_ONE, lineNumberIndex));
+-b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
++b.setProducedItemCount("output", b.CreateSub(lineNumberIndex, i64_ONE));
+     Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
+
+# Mutant 010
+@@ -98,99 +98,99 @@
+     b.CreateStore(endVal, b.getRawOutputPointer("output", i64_ONE, lineNumberIndex));
+-b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
++b.setProducedItemCount("output", b.CreateMul(lineNumberIndex, i64_ONE));
+     Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
+
+# Mutant 011
+@@ -98,99 +98,99 @@
+     b.CreateStore(endVal, b.getRawOutputPointer("output", i64_ONE, lineNumberIndex));
+-b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
++b.setProducedItemCount("output", b.CreateUDiv(lineNumberIndex, i64_ONE));
+     Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
+
+# Mutant 012
+@@ -98,99 +98,99 @@
+     b.CreateStore(endVal, b.getRawOutputPointer("output", i64_ONE, lineNumberIndex));
+-b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
++b.setProducedItemCount("output", b.CreateURem(lineNumberIndex, i64_ONE));
+     Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
+
+# Mutant 013
+@@ -99,100 +99,100 @@
+     b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
+-Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
++Value * const nextLineNumberIndex = b.CreateSub(lineNumberIndex, i64_ONE);
+     b.setProcessedItemCount("lineNumbers", nextLineNumberIndex);
+
+# Mutant 014
+@@ -99,100 +99,100 @@
+     b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
+-Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
++Value * const nextLineNumberIndex = b.CreateMul(lineNumberIndex, i64_ONE);
+     b.setProcessedItemCount("lineNumbers", nextLineNumberIndex);
+
+# Mutant 015
+@@ -99,100 +99,100 @@
+     b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
+-Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
++Value * const nextLineNumberIndex = b.CreateUDiv(lineNumberIndex, i64_ONE);
+     b.setProcessedItemCount("lineNumbers", nextLineNumberIndex);
+
+# Mutant 016
+@@ -99,100 +99,100 @@
+     b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
+-Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
++Value * const nextLineNumberIndex = b.CreateURem(lineNumberIndex, i64_ONE);
+     b.setProcessedItemCount("lineNumbers", nextLineNumberIndex);
+
+# Mutant 017
+@@ -106,107 +106,107 @@
+     b.SetInsertPoint(block_SkipSpan);
+-Value * const nextSpanIndex = b.CreateAdd(spanIndex, i64_ONE);
++Value * const nextSpanIndex = b.CreateSub(spanIndex, i64_ONE);
+     b.setProcessedItemCount("spans", nextSpanIndex);
+
+# Mutant 018
+@@ -106,107 +106,107 @@
+     b.SetInsertPoint(block_SkipSpan);
+-Value * const nextSpanIndex = b.CreateAdd(spanIndex, i64_ONE);
++Value * const nextSpanIndex = b.CreateMul(spanIndex, i64_ONE);
+     b.setProcessedItemCount("spans", nextSpanIndex);
+
+# Mutant 019
+@@ -106,107 +106,107 @@
+     b.SetInsertPoint(block_SkipSpan);
+-Value * const nextSpanIndex = b.CreateAdd(spanIndex, i64_ONE);
++Value * const nextSpanIndex = b.CreateUDiv(spanIndex, i64_ONE);
+     b.setProcessedItemCount("spans", nextSpanIndex);
+
+# Mutant 020
+@@ -106,107 +106,107 @@
+     b.SetInsertPoint(block_SkipSpan);
+-Value * const nextSpanIndex = b.CreateAdd(spanIndex, i64_ONE);
++Value * const nextSpanIndex = b.CreateURem(spanIndex, i64_ONE);
+     b.setProcessedItemCount("spans", nextSpanIndex);
+
+# Mutant 021
+@@ -70,71 +70,71 @@
+     Value * const ic_AvailableSpans = b.getAvailableItemCount("spans");
+-Value * const noAvailableLineNumbers = b.CreateICmpEQ(ic_AvailableLineNumbers, i64_ZERO);
++Value * const noAvailableLineNumbers = b.CreateICmpNE(ic_AvailableLineNumbers, i64_ZERO);
+     Value * const noAvailableSpans = b.CreateICmpEQ(ic_AvailableSpans, i64_ZERO);
+
+# Mutant 022
+@@ -70,71 +70,71 @@
+     Value * const ic_AvailableSpans = b.getAvailableItemCount("spans");
+-Value * const noAvailableLineNumbers = b.CreateICmpEQ(ic_AvailableLineNumbers, i64_ZERO);
++Value * const noAvailableLineNumbers = b.CreateICmpULT(ic_AvailableLineNumbers, i64_ZERO);
+     Value * const noAvailableSpans = b.CreateICmpEQ(ic_AvailableSpans, i64_ZERO);
+
+# Mutant 023
+@@ -70,71 +70,71 @@
+     Value * const ic_AvailableSpans = b.getAvailableItemCount("spans");
+-Value * const noAvailableLineNumbers = b.CreateICmpEQ(ic_AvailableLineNumbers, i64_ZERO);
++Value * const noAvailableLineNumbers = b.CreateICmpULE(ic_AvailableLineNumbers, i64_ZERO);
+     Value * const noAvailableSpans = b.CreateICmpEQ(ic_AvailableSpans, i64_ZERO);
+
+# Mutant 024
+@@ -70,71 +70,71 @@
+     Value * const ic_AvailableSpans = b.getAvailableItemCount("spans");
+-Value * const noAvailableLineNumbers = b.CreateICmpEQ(ic_AvailableLineNumbers, i64_ZERO);
++Value * const noAvailableLineNumbers = b.CreateICmpUGT(ic_AvailableLineNumbers, i64_ZERO);
+     Value * const noAvailableSpans = b.CreateICmpEQ(ic_AvailableSpans, i64_ZERO);
+
+# Mutant 025
+@@ -70,71 +70,71 @@
+     Value * const ic_AvailableSpans = b.getAvailableItemCount("spans");
+-Value * const noAvailableLineNumbers = b.CreateICmpEQ(ic_AvailableLineNumbers, i64_ZERO);
++Value * const noAvailableLineNumbers = b.CreateICmpUGE(ic_AvailableLineNumbers, i64_ZERO);
+     Value * const noAvailableSpans = b.CreateICmpEQ(ic_AvailableSpans, i64_ZERO);
+
+# Mutant 026
+@@ -71,72 +71,72 @@
+     Value * const noAvailableLineNumbers = b.CreateICmpEQ(ic_AvailableLineNumbers, i64_ZERO);
+-Value * const noAvailableSpans = b.CreateICmpEQ(ic_AvailableSpans, i64_ZERO);
++Value * const noAvailableSpans = b.CreateICmpNE(ic_AvailableSpans, i64_ZERO);
+     Value * const noAvailableStreams = b.CreateOr(noAvailableLineNumbers, noAvailableSpans);
+
+# Mutant 027
+@@ -71,72 +71,72 @@
+     Value * const noAvailableLineNumbers = b.CreateICmpEQ(ic_AvailableLineNumbers, i64_ZERO);
+-Value * const noAvailableSpans = b.CreateICmpEQ(ic_AvailableSpans, i64_ZERO);
++Value * const noAvailableSpans = b.CreateICmpULT(ic_AvailableSpans, i64_ZERO);
+     Value * const noAvailableStreams = b.CreateOr(noAvailableLineNumbers, noAvailableSpans);
+
+# Mutant 028
+@@ -71,72 +71,72 @@
+     Value * const noAvailableLineNumbers = b.CreateICmpEQ(ic_AvailableLineNumbers, i64_ZERO);
+-Value * const noAvailableSpans = b.CreateICmpEQ(ic_AvailableSpans, i64_ZERO);
++Value * const noAvailableSpans = b.CreateICmpULE(ic_AvailableSpans, i64_ZERO);
+     Value * const noAvailableStreams = b.CreateOr(noAvailableLineNumbers, noAvailableSpans);
+
+# Mutant 029
+@@ -71,72 +71,72 @@
+     Value * const noAvailableLineNumbers = b.CreateICmpEQ(ic_AvailableLineNumbers, i64_ZERO);
+-Value * const noAvailableSpans = b.CreateICmpEQ(ic_AvailableSpans, i64_ZERO);
++Value * const noAvailableSpans = b.CreateICmpUGT(ic_AvailableSpans, i64_ZERO);
+     Value * const noAvailableStreams = b.CreateOr(noAvailableLineNumbers, noAvailableSpans);
+
+# Mutant 030
+@@ -71,72 +71,72 @@
+     Value * const noAvailableLineNumbers = b.CreateICmpEQ(ic_AvailableLineNumbers, i64_ZERO);
+-Value * const noAvailableSpans = b.CreateICmpEQ(ic_AvailableSpans, i64_ZERO);
++Value * const noAvailableSpans = b.CreateICmpUGE(ic_AvailableSpans, i64_ZERO);
+     Value * const noAvailableStreams = b.CreateOr(noAvailableLineNumbers, noAvailableSpans);
+
+# Mutant 031
+@@ -77,78 +77,78 @@
+     auto GenerateContinueCheck = [&](Value * lnIdx, Value * spanIdx) -> Value * {
+-Value * const areMoreLineNumbers = b.CreateICmpULT(lnIdx, ic_AvailableLineNumbers);
++Value * const areMoreLineNumbers = b.CreateICmpULE(lnIdx, ic_AvailableLineNumbers);
+         Value * const areMoreSpans = b.CreateICmpULT(spanIdx, ic_AvailableSpans);
+
+# Mutant 032
+@@ -77,78 +77,78 @@
+     auto GenerateContinueCheck = [&](Value * lnIdx, Value * spanIdx) -> Value * {
+-Value * const areMoreLineNumbers = b.CreateICmpULT(lnIdx, ic_AvailableLineNumbers);
++Value * const areMoreLineNumbers = b.CreateICmpUGT(lnIdx, ic_AvailableLineNumbers);
+         Value * const areMoreSpans = b.CreateICmpULT(spanIdx, ic_AvailableSpans);
+
+# Mutant 033
+@@ -77,78 +77,78 @@
+     auto GenerateContinueCheck = [&](Value * lnIdx, Value * spanIdx) -> Value * {
+-Value * const areMoreLineNumbers = b.CreateICmpULT(lnIdx, ic_AvailableLineNumbers);
++Value * const areMoreLineNumbers = b.CreateICmpUGE(lnIdx, ic_AvailableLineNumbers);
+         Value * const areMoreSpans = b.CreateICmpULT(spanIdx, ic_AvailableSpans);
+
+# Mutant 034
+@@ -77,78 +77,78 @@
+     auto GenerateContinueCheck = [&](Value * lnIdx, Value * spanIdx) -> Value * {
+-Value * const areMoreLineNumbers = b.CreateICmpULT(lnIdx, ic_AvailableLineNumbers);
++Value * const areMoreLineNumbers = b.CreateICmpEQ(lnIdx, ic_AvailableLineNumbers);
+         Value * const areMoreSpans = b.CreateICmpULT(spanIdx, ic_AvailableSpans);
+
+# Mutant 035
+@@ -77,78 +77,78 @@
+     auto GenerateContinueCheck = [&](Value * lnIdx, Value * spanIdx) -> Value * {
+-Value * const areMoreLineNumbers = b.CreateICmpULT(lnIdx, ic_AvailableLineNumbers);
++Value * const areMoreLineNumbers = b.CreateICmpNE(lnIdx, ic_AvailableLineNumbers);
+         Value * const areMoreSpans = b.CreateICmpULT(spanIdx, ic_AvailableSpans);
+
+# Mutant 036
+@@ -78,79 +78,79 @@
+         Value * const areMoreLineNumbers = b.CreateICmpULT(lnIdx, ic_AvailableLineNumbers);
+-Value * const areMoreSpans = b.CreateICmpULT(spanIdx, ic_AvailableSpans);
++Value * const areMoreSpans = b.CreateICmpULE(spanIdx, ic_AvailableSpans);
+         return b.CreateAnd(areMoreLineNumbers, areMoreSpans);
+
+# Mutant 037
+@@ -78,79 +78,79 @@
+         Value * const areMoreLineNumbers = b.CreateICmpULT(lnIdx, ic_AvailableLineNumbers);
+-Value * const areMoreSpans = b.CreateICmpULT(spanIdx, ic_AvailableSpans);
++Value * const areMoreSpans = b.CreateICmpUGT(spanIdx, ic_AvailableSpans);
+         return b.CreateAnd(areMoreLineNumbers, areMoreSpans);
+
+# Mutant 038
+@@ -78,79 +78,79 @@
+         Value * const areMoreLineNumbers = b.CreateICmpULT(lnIdx, ic_AvailableLineNumbers);
+-Value * const areMoreSpans = b.CreateICmpULT(spanIdx, ic_AvailableSpans);
++Value * const areMoreSpans = b.CreateICmpUGE(spanIdx, ic_AvailableSpans);
+         return b.CreateAnd(areMoreLineNumbers, areMoreSpans);
+
+# Mutant 039
+@@ -78,79 +78,79 @@
+         Value * const areMoreLineNumbers = b.CreateICmpULT(lnIdx, ic_AvailableLineNumbers);
+-Value * const areMoreSpans = b.CreateICmpULT(spanIdx, ic_AvailableSpans);
++Value * const areMoreSpans = b.CreateICmpEQ(spanIdx, ic_AvailableSpans);
+         return b.CreateAnd(areMoreLineNumbers, areMoreSpans);
+
+# Mutant 040
+@@ -78,79 +78,79 @@
+         Value * const areMoreLineNumbers = b.CreateICmpULT(lnIdx, ic_AvailableLineNumbers);
+-Value * const areMoreSpans = b.CreateICmpULT(spanIdx, ic_AvailableSpans);
++Value * const areMoreSpans = b.CreateICmpNE(spanIdx, ic_AvailableSpans);
+         return b.CreateAnd(areMoreLineNumbers, areMoreSpans);
+
+# Mutant 041
+@@ -89,90 +89,90 @@
+     if (codegen::DebugOptionIsSet(codegen::EnableAsserts)) {
+-b.CreateAssert(b.CreateICmpUGE(lineNumVal, spanIndex), "spans have overtaken line numbers");
++b.CreateAssert(b.CreateICmpUGT(lineNumVal, spanIndex), "spans have overtaken line numbers");
+     }
+
+# Mutant 042
+@@ -89,90 +89,90 @@
+     if (codegen::DebugOptionIsSet(codegen::EnableAsserts)) {
+-b.CreateAssert(b.CreateICmpUGE(lineNumVal, spanIndex), "spans have overtaken line numbers");
++b.CreateAssert(b.CreateICmpULT(lineNumVal, spanIndex), "spans have overtaken line numbers");
+     }
+
+# Mutant 043
+@@ -89,90 +89,90 @@
+     if (codegen::DebugOptionIsSet(codegen::EnableAsserts)) {
+-b.CreateAssert(b.CreateICmpUGE(lineNumVal, spanIndex), "spans have overtaken line numbers");
++b.CreateAssert(b.CreateICmpULE(lineNumVal, spanIndex), "spans have overtaken line numbers");
+     }
+
+# Mutant 044
+@@ -89,90 +89,90 @@
+     if (codegen::DebugOptionIsSet(codegen::EnableAsserts)) {
+-b.CreateAssert(b.CreateICmpUGE(lineNumVal, spanIndex), "spans have overtaken line numbers");
++b.CreateAssert(b.CreateICmpEQ(lineNumVal, spanIndex), "spans have overtaken line numbers");
+     }
+
+# Mutant 045
+@@ -89,90 +89,90 @@
+     if (codegen::DebugOptionIsSet(codegen::EnableAsserts)) {
+-b.CreateAssert(b.CreateICmpUGE(lineNumVal, spanIndex), "spans have overtaken line numbers");
++b.CreateAssert(b.CreateICmpNE(lineNumVal, spanIndex), "spans have overtaken line numbers");
+     }
+
+# Mutant 046
+@@ -91,92 +91,92 @@
+     }
+-b.CreateCondBr(b.CreateICmpEQ(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
++b.CreateCondBr(b.CreateICmpNE(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
+ 
+# Mutant 047
+@@ -91,92 +91,92 @@
+     }
+-b.CreateCondBr(b.CreateICmpEQ(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
++b.CreateCondBr(b.CreateICmpULT(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
+ 
+# Mutant 048
+@@ -91,92 +91,92 @@
+     }
+-b.CreateCondBr(b.CreateICmpEQ(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
++b.CreateCondBr(b.CreateICmpULE(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
+ 
+# Mutant 049
+@@ -91,92 +91,92 @@
+     }
+-b.CreateCondBr(b.CreateICmpEQ(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
++b.CreateCondBr(b.CreateICmpUGT(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
+
+# Mutant 050
+@@ -91,92 +91,92 @@
+     }
+-b.CreateCondBr(b.CreateICmpEQ(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
++b.CreateCondBr(b.CreateICmpUGE(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
+
+ Mutant 051
+@@ -26,27 +26,27 @@
+     Value * const endIdx = b.CreateZExtOrBitCast(absoluteIndex, b.getInt64Ty());
+-Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
++Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+     Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+
+# Mutant 052
+@@ -26,27 +26,27 @@
+     Value * const endIdx = b.CreateZExtOrBitCast(absoluteIndex, b.getInt64Ty());
+-Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
++Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(2), producedCount);
+     Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+
+# Mutant 053
+@@ -26,27 +26,27 @@
+     Value * const endIdx = b.CreateZExtOrBitCast(absoluteIndex, b.getInt64Ty());
+-Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
++Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(-1), producedCount);
+     Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+
+# Mutant 054
+@@ -26,27 +26,27 @@
+     Value * const endIdx = b.CreateZExtOrBitCast(absoluteIndex, b.getInt64Ty());
+-Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
++Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(3), producedCount);
+     Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+
+# Mutant 055
+@@ -27,28 +27,28 @@
+     Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+-Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
++Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+     b.CreateStore(beginIdx, beginStorePtr);
+
+# Mutant 056
+@@ -27,28 +27,28 @@
+     Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+-Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
++Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(2), producedCount);
+     b.CreateStore(beginIdx, beginStorePtr);
+
+# Mutant 057
+@@ -27,28 +27,28 @@
+     Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+-Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
++Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(-1), producedCount);
+     b.CreateStore(beginIdx, beginStorePtr);
+
+# Mutant 058
+@@ -27,28 +27,28 @@
+     Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+-Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
++Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(3), producedCount);
+     b.CreateStore(beginIdx, beginStorePtr);
+
+# Mutant 059
+@@ -30,31 +30,31 @@
+     b.CreateStore(endIdx, endStorePtr);
+-b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
++b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(0)));
+     b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
+
+# Mutant 060
+@@ -30,31 +30,31 @@
+     b.CreateStore(endIdx, endStorePtr);
+-b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
++b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(2)));
+     b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
+
+# Mutant 061
+@@ -30,31 +30,31 @@
+     b.CreateStore(endIdx, endStorePtr);
+-b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
++b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(-1)));
+     b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
+
+# Mutant 062
+@@ -30,31 +30,31 @@
+     b.CreateStore(endIdx, endStorePtr);
+-b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
++b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(3)));
+     b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
+
+# Mutant 063
+@@ -31,32 +31,32 @@
+     b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
+-b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
++b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(0)));
+ }
+
+# Mutant 064
+@@ -31,32 +31,32 @@
+     b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
+-b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
++b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(2)));
+ }
+
+# Mutant 065
+@@ -31,32 +31,32 @@
+     b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
+-b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
++b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(-1)));
+ }
+
+# Mutant 066
+@@ -31,32 +31,32 @@
+     b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
+-b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
++b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(3)));
+ }
+
+# Mutant 067
+@@ -55,56 +55,56 @@
+     Type * const i64 = b.getInt64Ty();
+-Value * const i64_ZERO = b.getInt64(0);
++Value * const i64_ZERO = b.getInt64(1);
+     Value * const i64_ONE = b.getInt64(1);
+
+# Mutant 068
+@@ -55,56 +55,56 @@
+     Type * const i64 = b.getInt64Ty();
+-Value * const i64_ZERO = b.getInt64(0);
++Value * const i64_ZERO = b.getInt64(2);
+     Value * const i64_ONE = b.getInt64(1);
+
+# Mutant 069
+@@ -55,56 +55,56 @@
+     Type * const i64 = b.getInt64Ty();
+-Value * const i64_ZERO = b.getInt64(0);
++Value * const i64_ZERO = b.getInt64(-1);
+     Value * const i64_ONE = b.getInt64(1);
+
+# Mutant 070
+@@ -55,56 +55,56 @@
+     Type * const i64 = b.getInt64Ty();
+-Value * const i64_ZERO = b.getInt64(0);
++Value * const i64_ZERO = b.getInt64(3);
+     Value * const i64_ONE = b.getInt64(1);
+
+# Mutant 071
+@@ -56,57 +56,57 @@
+     Value * const i64_ZERO = b.getInt64(0);
+-Value * const i64_ONE = b.getInt64(1);
++Value * const i64_ONE = b.getInt64(0);
+ 
+# Mutant 072
+@@ -56,57 +56,57 @@
+     Value * const i64_ZERO = b.getInt64(0);
+-Value * const i64_ONE = b.getInt64(1);
++Value * const i64_ONE = b.getInt64(2);
+ 
+# Mutant 073
+@@ -56,57 +56,57 @@
+     Value * const i64_ZERO = b.getInt64(0);
+-Value * const i64_ONE = b.getInt64(1);
++Value * const i64_ONE = b.getInt64(-1);
+ 
+# Mutant 074
+@@ -56,57 +56,57 @@
+     Value * const i64_ZERO = b.getInt64(0);
+-Value * const i64_ONE = b.getInt64(1);
++Value * const i64_ONE = b.getInt64(3);
+ 
+# Mutant 075
+@@ -72,73 +72,73 @@
+     Value * const noAvailableSpans = b.CreateICmpEQ(ic_AvailableSpans, i64_ZERO);
+-Value * const noAvailableStreams = b.CreateOr(noAvailableLineNumbers, noAvailableSpans);
++Value * const noAvailableStreams = b.CreateAnd(noAvailableLineNumbers, noAvailableSpans);
+     Value * const shouldExit = b.CreateOr(noAvailableStreams, b.isFinal());
+
+# Mutant 076
+@@ -73,74 +73,74 @@
+     Value * const noAvailableStreams = b.CreateOr(noAvailableLineNumbers, noAvailableSpans);
+-Value * const shouldExit = b.CreateOr(noAvailableStreams, b.isFinal());
++Value * const shouldExit = b.CreateAnd(noAvailableStreams, b.isFinal());
+     b.CreateUnlikelyCondBr(shouldExit, block_Exit, block_PreProcess);
+
+# Mutant 077
+@@ -79,80 +79,80 @@
+         Value * const areMoreSpans = b.CreateICmpULT(spanIdx, ic_AvailableSpans);
+-return b.CreateAnd(areMoreLineNumbers, areMoreSpans);
++return b.CreateOr(areMoreLineNumbers, areMoreSpans);
+     };
+
+# Mutant 078
+@@ -30,31 +30,31 @@
+     b.CreateStore(endIdx, endStorePtr);
+-b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
++b.setScalarField("lineBegin", b.CreateSub(endIdx, b.getInt64(1)));
+     b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
+
+# Mutant 079
+@@ -31,32 +31,32 @@
+     b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
+-b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
++b.setProducedItemCount("output", b.CreateSub(producedCount, b.getSize(1)));
+ }
+
+# Mutant 080
+@@ -98,99 +98,99 @@
+     b.CreateStore(endVal, b.getRawOutputPointer("output", i64_ONE, lineNumberIndex));
+-b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
++b.setProducedItemCount("output", b.CreateSub(lineNumberIndex, i64_ONE));
+     Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
+
+# Mutant 081
+@@ -99,100 +99,100 @@
+     b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
+-Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
++Value * const nextLineNumberIndex = b.CreateSub(lineNumberIndex, i64_ONE);
+     b.setProcessedItemCount("lineNumbers", nextLineNumberIndex);
+
+# Mutant 082
+@@ -106,107 +106,107 @@
+     b.SetInsertPoint(block_SkipSpan);
+-Value * const nextSpanIndex = b.CreateAdd(spanIndex, i64_ONE);
++Value * const nextSpanIndex = b.CreateSub(spanIndex, i64_ONE);
+     b.setProcessedItemCount("spans", nextSpanIndex);
+
+# Mutant 083
+@@ -30,31 +30,31 @@
+     b.CreateStore(endIdx, endStorePtr);
+-b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
++// [DELETED] b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
+     b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
+
+# Mutant 084
+@@ -31,32 +31,32 @@
+     b.setScalarField("lineBegin", b.CreateAdd(endIdx, b.getInt64(1)));
+-b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
++// [DELETED] b.setProducedItemCount("output", b.CreateAdd(producedCount, b.getSize(1)));
+ }
+
+# Mutant 085
+@@ -98,99 +98,99 @@
+     b.CreateStore(endVal, b.getRawOutputPointer("output", i64_ONE, lineNumberIndex));
+-b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
++// [DELETED] b.setProducedItemCount("output", b.CreateAdd(lineNumberIndex, i64_ONE));
+     Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
+
+# Mutant 086
+@@ -100,101 +100,101 @@
+     Value * const nextLineNumberIndex = b.CreateAdd(lineNumberIndex, i64_ONE);
+-b.setProcessedItemCount("lineNumbers", nextLineNumberIndex);
++// [DELETED] b.setProcessedItemCount("lineNumbers", nextLineNumberIndex);
+     lineNumberIndex->addIncoming(nextLineNumberIndex, block_UseSpan);
+
+# Mutant 087
+@@ -107,108 +107,108 @@
+     Value * const nextSpanIndex = b.CreateAdd(spanIndex, i64_ONE);
+-b.setProcessedItemCount("spans", nextSpanIndex);
++// [DELETED] b.setProcessedItemCount("spans", nextSpanIndex);
+     lineNumberIndex->addIncoming(lineNumberIndex, block_SkipSpan);
+
+# Mutant 088
+@@ -91,92 +91,92 @@
+     }
+-b.CreateCondBr(b.CreateICmpEQ(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
++b.CreateCondBr(b.CreateICmpNE(lineNumVal, spanIndex), block_UseSpan, block_SkipSpan);
+ 
+# Mutant 089
+@@ -26,27 +26,27 @@
+     Value * const endIdx = b.CreateZExtOrBitCast(absoluteIndex, b.getInt64Ty());
+-Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
++Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+     Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+
+# Mutant 090
+@@ -26,27 +26,27 @@
+     Value * const endIdx = b.CreateZExtOrBitCast(absoluteIndex, b.getInt64Ty());
+-Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
++Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(2), producedCount);
+     Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+
+# Mutant 091
+@@ -27,28 +27,28 @@
+     Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+-Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
++Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+     b.CreateStore(beginIdx, beginStorePtr);
+
+# Mutant 092
+@@ -27,28 +27,28 @@
+     Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+-Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
++Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(2), producedCount);
+     b.CreateStore(beginIdx, beginStorePtr);
+
+# Mutant 093
+@@ -26,27 +26,27 @@
+     Value * const endIdx = b.CreateZExtOrBitCast(absoluteIndex, b.getInt64Ty());
+-Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
++Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+     Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+
+# Mutant 094
+@@ -26,27 +26,27 @@
+     Value * const endIdx = b.CreateZExtOrBitCast(absoluteIndex, b.getInt64Ty());
+-Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
++Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(2), producedCount);
+     Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+
+# Mutant 095
+@@ -26,27 +26,27 @@
+     Value * const endIdx = b.CreateZExtOrBitCast(absoluteIndex, b.getInt64Ty());
+-Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
++Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(-1), producedCount);
+     Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+
+# Mutant 096
+@@ -26,27 +26,27 @@
+     Value * const endIdx = b.CreateZExtOrBitCast(absoluteIndex, b.getInt64Ty());
+-Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
++Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(3), producedCount);
+     Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
+
+# Mutant 097
+@@ -27,28 +27,28 @@
+     Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+-Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
++Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+     b.CreateStore(beginIdx, beginStorePtr);
+
+# Mutant 098
+@@ -27,28 +27,28 @@
+     Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+-Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
++Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(2), producedCount);
+     b.CreateStore(beginIdx, beginStorePtr);
+
+# Mutant 099
+@@ -27,28 +27,28 @@
+     Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+-Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
++Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(-1), producedCount);
+     b.CreateStore(beginIdx, beginStorePtr);
+
+# Mutant 100
+@@ -27,28 +27,28 @@
+     Value * const beginStorePtr = b.getRawOutputPointer("output", b.getInt32(0), producedCount);
+-Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(1), producedCount);
++Value * const endStorePtr = b.getRawOutputPointer("output", b.getInt32(3), producedCount);
+     b.CreateStore(beginIdx, beginStorePtr);
