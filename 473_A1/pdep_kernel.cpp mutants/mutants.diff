@@ -1,0 +1,1036 @@
+
+### M002 and_to_or offset=4766 before='&&' after='||'
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..85b7c19d 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -109,3 +109,3 @@ void MergeByMask(PipelineBuilder & P,
+     }
+-    if (ElemSpread && (elems == 1) && (fw >= 8)) {
++    if (ElemSpread && (elems == 1) || (fw >= 8)) {
+         P.CreateKernelCall<ElemMergeKernel>(mask, a, b, merged);
+
+### M003 and_to_or offset=40660 before='&&' after='||'
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..cd33e720 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -774,3 +774,3 @@ void PDEPFieldDepositLogic(KernelBuilder & b, llvm::Value * const numOfStrides,
+ void FieldDepositKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value * const numOfStrides) {
+-    if (b.hasFeature(IDISA::Feature::AVX_BMI2) && ((mFieldWidth == 32) || (mFieldWidth == 64))) {
++    if (b.hasFeature(IDISA::Feature::AVX_BMI2) || ((mFieldWidth == 32) || (mFieldWidth == 64))) {
+         PDEPFieldDepositLogic(b, numOfStrides, mFieldWidth, mStreamCount, getStride());
+
+### M004 and_to_or offset=46829 before='&&' after='||'
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..74500cdf 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -898,3 +898,3 @@ PDEPFieldDepositKernel::PDEPFieldDepositKernel(LLVMTypeSystemInterface & ts
+ , mStreamCount(input->getNumElements()) {
+-    if ((fieldWidth != 32) && (fieldWidth != 64))
++    if ((fieldWidth != 32) || (fieldWidth != 64))
+         llvm::report_fatal_error("Unsupported PDEP width for PDEPFieldDepositKernel");
+
+### M005 and_to_or offset=86692 before='&&' after='||'
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..fbc4ef40 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1639,3 +1639,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+ 
+-    if (numElements == 1 && numInputElements == 1) {
++    if (numElements == 1 || numInputElements == 1) {
+ 
+
+### M006 eq_to_neq offset=4760 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..82a7d844 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -109,3 +109,3 @@ void MergeByMask(PipelineBuilder & P,
+     }
+-    if (ElemSpread && (elems == 1) && (fw >= 8)) {
++    if (ElemSpread && (elems != 1) && (fw >= 8)) {
+         P.CreateKernelCall<ElemMergeKernel>(mask, a, b, merged);
+
+### M007 eq_to_neq offset=5971 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..ce6896ad 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -133,3 +133,3 @@ StreamExpandKernel::StreamExpandKernel(LLVMTypeSystemInterface & ts,
+                         nm << "streamExpand"  << StreamExpandStrideSize << ':' << FieldWidth;
+-                        if (opt == StreamExpandOptimization::NullCheck)  {
++                        if (opt != StreamExpandOptimization::NullCheck)  {
+                             nm << 'N';
+
+### M008 eq_to_neq offset=7902 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..ab706721 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -173,3 +173,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+     if (getStride() != b.getBitBlockWidth()) {
+-        assert ((getStride() % b.getBitBlockWidth()) == 0);
++        assert ((getStride() % b.getBitBlockWidth()) != 0);
+         ConstantInt * const mult = b.getSize(getStride() / b.getBitBlockWidth());
+
+### M009 eq_to_neq offset=8758 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..5d4033e4 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -191,3 +191,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+     b.SetInsertPoint(expandLoop);
+-    const unsigned incomingCount = (mOptimization == StreamExpandOptimization::NullCheck) ? 3 : 2;
++    const unsigned incomingCount = (mOptimization != StreamExpandOptimization::NullCheck) ? 3 : 2;
+     PHINode * blockNoPhi = b.CreatePHI(b.getSizeTy(), incomingCount);
+
+### M010 eq_to_neq offset=9555 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..b579f1b3 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -205,3 +205,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+     Value * moreToDo = b.CreateICmpNE(nextBlk, numOfBlocks);
+-    if (mOptimization == StreamExpandOptimization::NullCheck) {
++    if (mOptimization != StreamExpandOptimization::NullCheck) {
+         BasicBlock * expandLoopContinue = b.CreateBasicBlock("expandLoopContinue");
+
+### M011 eq_to_neq offset=12257 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..d545867b 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -252,3 +252,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+     Value * partialSum = b.hsimd_partial_sum(mFieldWidth, fieldPopCounts);
+-    assert (partialSum->getType() == fwSplat->getType());
++    assert (partialSum->getType() != fwSplat->getType());
+     Value * const blockPopCount = b.CreateZExtOrTrunc(b.CreateExtractElement(partialSum, numFields - 1), sizeTy);
+
+### M012 eq_to_neq offset=12487 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..0f3d57d1 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -255,3 +255,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+     partialSum = b.mvmd_slli(mFieldWidth, partialSum, 1);
+-    assert (partialSum->getType() == fwSplat->getType());
++    assert (partialSum->getType() != fwSplat->getType());
+     Value * const source_field_lo = b.CreateUDiv(partialSum, fwSplat);
+
+### M013 eq_to_neq offset=16680 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..44bd46bf 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -332,3 +332,3 @@ void ElemMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value * c
+     if (getStride() != maskWidth) {
+-        assert ((getStride() % b.getBitBlockWidth()) == 0);
++        assert ((getStride() % b.getBitBlockWidth()) != 0);
+         numOfIterations = b.CreateMul(numOfStrides, b.getSize(getStride() / maskWidth));
+
+### M014 eq_to_neq offset=23772 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..a1b6fcdc 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -467,3 +467,3 @@ void ElemSpreadKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+     if (getStride() != b.getBitBlockWidth()) {
+-        assert ((getStride() % b.getBitBlockWidth()) == 0);
++        assert ((getStride() % b.getBitBlockWidth()) != 0);
+         ConstantInt * const mult = b.getSize(getStride() / b.getBitBlockWidth());
+
+### M015 eq_to_neq offset=31899 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..87e13b04 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -626,3 +626,3 @@ void StreamMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+     if (getStride() != b.getBitBlockWidth()) {
+-        assert ((getStride() % b.getBitBlockWidth()) == 0);
++        assert ((getStride() % b.getBitBlockWidth()) != 0);
+         ConstantInt * const mult = b.getSize(getStride() / b.getBitBlockWidth());
+
+### M016 eq_to_neq offset=40677 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..9f83d5e8 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -774,3 +774,3 @@ void PDEPFieldDepositLogic(KernelBuilder & b, llvm::Value * const numOfStrides,
+ void FieldDepositKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value * const numOfStrides) {
+-    if (b.hasFeature(IDISA::Feature::AVX_BMI2) && ((mFieldWidth == 32) || (mFieldWidth == 64))) {
++    if (b.hasFeature(IDISA::Feature::AVX_BMI2) && ((mFieldWidth != 32) || (mFieldWidth == 64))) {
+         PDEPFieldDepositLogic(b, numOfStrides, mFieldWidth, mStreamCount, getStride());
+
+### M017 eq_to_neq offset=40700 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..34493878 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -774,3 +774,3 @@ void PDEPFieldDepositLogic(KernelBuilder & b, llvm::Value * const numOfStrides,
+ void FieldDepositKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value * const numOfStrides) {
+-    if (b.hasFeature(IDISA::Feature::AVX_BMI2) && ((mFieldWidth == 32) || (mFieldWidth == 64))) {
++    if (b.hasFeature(IDISA::Feature::AVX_BMI2) && ((mFieldWidth == 32) || (mFieldWidth != 64))) {
+         PDEPFieldDepositLogic(b, numOfStrides, mFieldWidth, mStreamCount, getStride());
+
+### M018 eq_to_neq offset=54063 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..f0e363fa 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1033,3 +1033,3 @@ std::string InsertString(StreamSet * mask, InsertPosition p) {
+     std::string s = std::to_string(mask->getNumElements()) + "x1_";
+-    return s + (p == InsertPosition::Before ? "Before" : "After");
++    return s + (p != InsertPosition::Before ? "Before" : "After");
+ }
+
+### M019 eq_to_neq offset=55618 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..ccfba205 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1063,3 +1063,3 @@ void UnitInsertionExtractionMasks::generateDoBlockMethod(KernelBuilder & b) {
+     Value * extract_mask_hi = nullptr;
+-    if (mInsertPos == InsertPosition::Before) {
++    if (mInsertPos != InsertPosition::Before) {
+         mask01 = b.simd_himask(2);
+
+### M020 eq_to_neq offset=59655 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..c085fe88 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1140,3 +1140,3 @@ void UnitInsertionSpreadMaskKernel::generateDoBlockMethod(KernelBuilder & b) {
+     Value * extract_mask[2];
+-    if (mInsertPos == InsertPosition::Before) {
++    if (mInsertPos != InsertPosition::Before) {
+         mask01 = b.simd_himask(2);
+
+### M021 eq_to_neq offset=63188 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..e749cc1f 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1207,3 +1207,3 @@ void SpreadMaskStep::generatePabloMethod() {
+         std::string vname = "divided_counts[" + std::to_string(i) + "]";
+-        if (mInsertPos == InsertPosition::Before) {
++        if (mInsertPos != InsertPosition::Before) {
+             divided_counts[i] = pb.createOr(divided_remaining[i], pb.createLookahead(divided_counts[i], 1), vname);
+
+### M022 eq_to_neq offset=63941 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..b1020a2c 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1224,3 +1224,3 @@ void InsertionSpreadMask(PipelineBuilder & P,
+     unsigned steps = bixNumInsertCount->getNumElements();
+-    if (steps == 1) {
++    if (steps != 1) {
+         UnitInsertionSpreadMask(P, bixNumInsertCount, spread_mask, pos);
+
+### M023 eq_to_neq offset=73404 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..ee56296e 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1387,3 +1387,3 @@ void InsertionSpreadMaskKernel::generateProcessingLogic(KernelBuilder & b,
+ 
+-    if (mInsertPos == InsertPosition::After) {
++    if (mInsertPos != InsertPosition::After) {
+         // Generate a 1 bit followed by insertAmt zeroes.
+
+### M024 eq_to_neq offset=80432 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..ac6ce63f 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1511,3 +1511,3 @@ ByteReplaceByMask::ByteReplaceByMask(LLVMTypeSystemInterface & b, StreamSet * ma
+ {Binding{"output", output, FixedRate(), InOut("ToFill")}}, {}, {}, {}) {
+-    assert(mask->getNumElements() == 1);
++    assert(mask->getNumElements() != 1);
+     assert(mask->getFieldWidth() == 1);
+
+### M025 eq_to_neq offset=80472 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..e7224aa0 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1512,3 +1512,3 @@ ByteReplaceByMask::ByteReplaceByMask(LLVMTypeSystemInterface & b, StreamSet * ma
+     assert(mask->getNumElements() == 1);
+-    assert(mask->getFieldWidth() == 1);
++    assert(mask->getFieldWidth() != 1);
+     assert(ToFill->getFieldWidth() == ToFill->getFieldWidth());
+
+### M026 eq_to_neq offset=80514 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..ae0af9c3 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1513,3 +1513,3 @@ ByteReplaceByMask::ByteReplaceByMask(LLVMTypeSystemInterface & b, StreamSet * ma
+     assert(mask->getFieldWidth() == 1);
+-    assert(ToFill->getFieldWidth() == ToFill->getFieldWidth());
++    assert(ToFill->getFieldWidth() != ToFill->getFieldWidth());
+     assert(ToFill->getFieldWidth() == output->getFieldWidth());
+
+### M027 eq_to_neq offset=80578 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..2aca1808 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1514,3 +1514,3 @@ ByteReplaceByMask::ByteReplaceByMask(LLVMTypeSystemInterface & b, StreamSet * ma
+     assert(ToFill->getFieldWidth() == ToFill->getFieldWidth());
+-    assert(ToFill->getFieldWidth() == output->getFieldWidth());
++    assert(ToFill->getFieldWidth() != output->getFieldWidth());
+     assert(ToFill->getNumElements() == 1);
+
+### M028 eq_to_neq offset=80643 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..8e3f03b1 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1515,3 +1515,3 @@ ByteReplaceByMask::ByteReplaceByMask(LLVMTypeSystemInterface & b, StreamSet * ma
+     assert(ToFill->getFieldWidth() == output->getFieldWidth());
+-    assert(ToFill->getNumElements() == 1);
++    assert(ToFill->getNumElements() != 1);
+     assert(Filler->getNumElements() == 1);
+
+### M029 eq_to_neq offset=80686 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..1d42fb1e 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1516,3 +1516,3 @@ ByteReplaceByMask::ByteReplaceByMask(LLVMTypeSystemInterface & b, StreamSet * ma
+     assert(ToFill->getNumElements() == 1);
+-    assert(Filler->getNumElements() == 1);
++    assert(Filler->getNumElements() != 1);
+     assert(output->getNumElements() == 1);
+
+### M030 eq_to_neq offset=80729 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..e25bff8a 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1517,3 +1517,3 @@ ByteReplaceByMask::ByteReplaceByMask(LLVMTypeSystemInterface & b, StreamSet * ma
+     assert(Filler->getNumElements() == 1);
+-    assert(output->getNumElements() == 1);
++    assert(output->getNumElements() != 1);
+ }
+
+### M031 eq_to_neq offset=86687 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..3811c898 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1639,3 +1639,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+ 
+-    if (numElements == 1 && numInputElements == 1) {
++    if (numElements != 1 && numInputElements == 1) {
+ 
+
+### M033 eq_to_neq offset=90712 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..cae3adc7 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1713,3 +1713,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+             pending[i] = b.mvmd_srl(fieldWidth, pending[i], initialShift);
+-            assert (pending[i]->getType() == dataVecTy);
++            assert (pending[i]->getType() != dataVecTy);
+         }
+
+### M034 eq_to_neq offset=92741 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..a746c616 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1764,3 +1764,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+ 
+-                if (i == 0) {
++                if (i != 0) {
+                     spreadElem[j] = b.CreateExtractElement(spreadVec, b.getInt32(j));
+
+### M035 eq_to_neq offset=94314 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..5dcd39ba 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1783,3 +1783,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+ 
+-                assert (result->getType() == dataVecTy);
++                assert (result->getType() != dataVecTy);
+                 assert (pending[i]->getType() == dataVecTy);
+
+### M036 eq_to_neq offset=94375 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..f12bc01c 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1784,3 +1784,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+                 assert (result->getType() == dataVecTy);
+-                assert (pending[i]->getType() == dataVecTy);
++                assert (pending[i]->getType() != dataVecTy);
+ 
+
+### M037 eq_to_neq offset=94942 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..19b6ccbe 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1793,3 +1793,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+                 Value * priorPending = b.mvmd_srl(fieldWidth, result, popCount[j + 1]);
+-                assert (priorPending->getType() == dataVecTy);
++                assert (priorPending->getType() != dataVecTy);
+                 priorPending = b.CreateSelect(someItemsAreUndeposited[j], priorPending, ZERO_VEC);
+
+### M038 eq_to_neq offset=95209 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..44456d02 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1796,3 +1796,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+                 Value * newPending = b.mvmd_srl(fieldWidth, newData, unitsRemainingOfPriorLoadedBlock[j]);
+-                assert (newPending->getType() == dataVecTy);
++                assert (newPending->getType() != dataVecTy);
+                 newPending = b.CreateSelect(preservePendingData[j], newPending, ZERO_VEC);
+
+### M039 eq_to_neq offset=95439 before='==' after='!='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..4ca9872e 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1801,3 +1801,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+ 
+-            assert (pending[i]->getType() == dataVecTy);
++            assert (pending[i]->getType() != dataVecTy);
+             pendingPhi[i]->addIncoming(pending[i], packLoop);
+
+### M040 neq_to_eq offset=2858 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..b32a3e16 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -63,3 +63,3 @@ void SpreadByMask(PipelineBuilder & P,
+         bool useElemSpread = ElemSpread;
+-        if (streamOffset || toSpread->getNumElements() != outputs->getNumElements()) {
++        if (streamOffset || toSpread->getNumElements() == outputs->getNumElements()) {
+             offset = P.CreateConstant(P.getSize(streamOffset));
+
+### M041 neq_to_eq offset=4428 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..8052eb59 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -103,3 +103,3 @@ void MergeByMask(PipelineBuilder & P,
+     unsigned fw = merged->getFieldWidth();
+-    if ((a->getNumElements() != elems) || (b->getNumElements() != elems)) {
++    if ((a->getNumElements() == elems) || (b->getNumElements() != elems)) {
+         llvm::report_fatal_error("MergeByMask called with incompatible element counts");
+
+### M042 neq_to_eq offset=4462 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..a0cdb44f 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -103,3 +103,3 @@ void MergeByMask(PipelineBuilder & P,
+     unsigned fw = merged->getFieldWidth();
+-    if ((a->getNumElements() != elems) || (b->getNumElements() != elems)) {
++    if ((a->getNumElements() != elems) || (b->getNumElements() == elems)) {
+         llvm::report_fatal_error("MergeByMask called with incompatible element counts");
+
+### M043 neq_to_eq offset=4598 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..7c8dbdf8 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -106,3 +106,3 @@ void MergeByMask(PipelineBuilder & P,
+     }
+-    if ((a->getFieldWidth() != fw) || (b->getFieldWidth() != fw)) {
++    if ((a->getFieldWidth() == fw) || (b->getFieldWidth() != fw)) {
+         llvm::report_fatal_error("MergeByMask called with incompatible field widths");
+
+### M044 neq_to_eq offset=4628 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..6c480c37 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -106,3 +106,3 @@ void MergeByMask(PipelineBuilder & P,
+     }
+-    if ((a->getFieldWidth() != fw) || (b->getFieldWidth() != fw)) {
++    if ((a->getFieldWidth() != fw) || (b->getFieldWidth() == fw)) {
+         llvm::report_fatal_error("MergeByMask called with incompatible field widths");
+
+### M045 neq_to_eq offset=7822 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..aaba987c 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -172,3 +172,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+     Value * numOfBlocks = numOfStrides;
+-    if (getStride() != b.getBitBlockWidth()) {
++    if (getStride() == b.getBitBlockWidth()) {
+         assert ((getStride() % b.getBitBlockWidth()) == 0);
+
+### M046 neq_to_eq offset=16611 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..c5bd8bec 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -331,3 +331,3 @@ void ElemMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value * c
+     Value * numOfIterations = numOfStrides;
+-    if (getStride() != maskWidth) {
++    if (getStride() == maskWidth) {
+         assert ((getStride() % b.getBitBlockWidth()) == 0);
+
+### M047 neq_to_eq offset=23692 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..d041d5bd 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -466,3 +466,3 @@ void ElemSpreadKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+     Value * numOfBlocks = numOfStrides;
+-    if (getStride() != b.getBitBlockWidth()) {
++    if (getStride() == b.getBitBlockWidth()) {
+         assert ((getStride() % b.getBitBlockWidth()) == 0);
+
+### M048 neq_to_eq offset=31819 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..97994257 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -625,3 +625,3 @@ void StreamMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+     Value * numOfBlocks = numOfStrides;
+-    if (getStride() != b.getBitBlockWidth()) {
++    if (getStride() == b.getBitBlockWidth()) {
+         assert ((getStride() % b.getBitBlockWidth()) == 0);
+
+### M049 neq_to_eq offset=41103 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..619b3051 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -782,3 +782,3 @@ void FieldDepositKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+         Value * numOfBlocks = numOfStrides;
+-        if (getStride() != b.getBitBlockWidth()) {
++        if (getStride() == b.getBitBlockWidth()) {
+             numOfBlocks = b.CreateShl(numOfStrides, b.getSize(floor_log2(getStride()/b.getBitBlockWidth())));
+
+### M050 neq_to_eq offset=42982 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..f3af23c5 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -821,3 +821,3 @@ void PDEPFieldDepositLogic(KernelBuilder & b, llvm::Value * const numOfStrides,
+     Value * numOfBlocks = numOfStrides;
+-    if (stride != b.getBitBlockWidth()) {
++    if (stride == b.getBitBlockWidth()) {
+         numOfBlocks = b.CreateShl(numOfStrides, b.getSize(floor_log2(stride/b.getBitBlockWidth())));
+
+### M051 neq_to_eq offset=46822 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..8fa982c8 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -898,3 +898,3 @@ PDEPFieldDepositKernel::PDEPFieldDepositKernel(LLVMTypeSystemInterface & ts
+ , mStreamCount(input->getNumElements()) {
+-    if ((fieldWidth != 32) && (fieldWidth != 64))
++    if ((fieldWidth == 32) && (fieldWidth != 64))
+         llvm::report_fatal_error("Unsupported PDEP width for PDEPFieldDepositKernel");
+
+### M052 neq_to_eq offset=46844 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..47c334c3 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -898,3 +898,3 @@ PDEPFieldDepositKernel::PDEPFieldDepositKernel(LLVMTypeSystemInterface & ts
+ , mStreamCount(input->getNumElements()) {
+-    if ((fieldWidth != 32) && (fieldWidth != 64))
++    if ((fieldWidth != 32) && (fieldWidth == 64))
+         llvm::report_fatal_error("Unsupported PDEP width for PDEPFieldDepositKernel");
+
+### M053 neq_to_eq offset=48389 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..b59a71f4 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -930,3 +930,3 @@ void PDEPkernel::generateMultiBlockLogic(KernelBuilder & b, Value * const numOfS
+     Value * numOfBlocks = numOfStrides;
+-    if (getStride() != b.getBitBlockWidth()) {
++    if (getStride() == b.getBitBlockWidth()) {
+         numOfBlocks = b.CreateShl(numOfStrides, b.getSize(floor_log2(getStride()/b.getBitBlockWidth())));
+
+### M054 neq_to_eq offset=79008 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..f1ec42df 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1485,3 +1485,3 @@ void ByteCombine::generateMultiBlockLogic(KernelBuilder & b, Value * const numOf
+     Value * numOfBlocks = numOfStrides;
+-    if (getStride() != b.getBitBlockWidth()) {
++    if (getStride() == b.getBitBlockWidth()) {
+         numOfBlocks = b.CreateShl(numOfStrides, b.getSize(floor_log2(getStride()/b.getBitBlockWidth())));
+
+### M055 neq_to_eq offset=84724 before='!=' after='=='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..452b8031 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1602,3 +1602,3 @@ ByteSpreadByMaskKernel::ByteSpreadByMaskKernel(LLVMTypeSystemInterface & b, Stre
+     }
+-    if (LLVM_UNLIKELY(output->getFieldWidth() != fieldWidth)) {
++    if (LLVM_UNLIKELY(output->getFieldWidth() == fieldWidth)) {
+         report_fatal_error(Twine{getName(), ": input field width does not match output field width"});
+
+### M056 or_to_and offset=2828 before='||' after='&&'
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..9690f1d8 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -63,3 +63,3 @@ void SpreadByMask(PipelineBuilder & P,
+         bool useElemSpread = ElemSpread;
+-        if (streamOffset || toSpread->getNumElements() != outputs->getNumElements()) {
++        if (streamOffset && toSpread->getNumElements() != outputs->getNumElements()) {
+             offset = P.CreateConstant(P.getSize(streamOffset));
+
+### M057 or_to_and offset=4438 before='||' after='&&'
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..c0daa548 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -103,3 +103,3 @@ void MergeByMask(PipelineBuilder & P,
+     unsigned fw = merged->getFieldWidth();
+-    if ((a->getNumElements() != elems) || (b->getNumElements() != elems)) {
++    if ((a->getNumElements() != elems) && (b->getNumElements() != elems)) {
+         llvm::report_fatal_error("MergeByMask called with incompatible element counts");
+
+### M058 or_to_and offset=4605 before='||' after='&&'
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..1637f533 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -106,3 +106,3 @@ void MergeByMask(PipelineBuilder & P,
+     }
+-    if ((a->getFieldWidth() != fw) || (b->getFieldWidth() != fw)) {
++    if ((a->getFieldWidth() != fw) && (b->getFieldWidth() != fw)) {
+         llvm::report_fatal_error("MergeByMask called with incompatible field widths");
+
+### M059 or_to_and offset=40684 before='||' after='&&'
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..86218d5b 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -774,3 +774,3 @@ void PDEPFieldDepositLogic(KernelBuilder & b, llvm::Value * const numOfStrides,
+ void FieldDepositKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value * const numOfStrides) {
+-    if (b.hasFeature(IDISA::Feature::AVX_BMI2) && ((mFieldWidth == 32) || (mFieldWidth == 64))) {
++    if (b.hasFeature(IDISA::Feature::AVX_BMI2) && ((mFieldWidth == 32) && (mFieldWidth == 64))) {
+         PDEPFieldDepositLogic(b, numOfStrides, mFieldWidth, mStreamCount, getStride());
+
+### M060 relop_ge_to_gt offset=4773 before='>=' after='>'
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..1f9d8404 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -109,3 +109,3 @@ void MergeByMask(PipelineBuilder & P,
+     }
+-    if (ElemSpread && (elems == 1) && (fw >= 8)) {
++    if (ElemSpread && (elems == 1) && (fw > 8)) {
+         P.CreateKernelCall<ElemMergeKernel>(mask, a, b, merged);
+
+### M061 relop_gt_to_ge offset=84884 before='>' after='>='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..48fc9740 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1605,3 +1605,3 @@ ByteSpreadByMaskKernel::ByteSpreadByMaskKernel(LLVMTypeSystemInterface & b, Stre
+     }
+-    if (output->getNumElements() > byteStream->getNumElements()) {
++    if (output->getNumElements() >= byteStream->getNumElements()) {
+         report_fatal_error(Twine{getName(), ": number of output streams exceeds the input streamset size"});
+
+### M062 relop_lt_to_le offset=2281 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..13384e43 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -54,3 +54,3 @@ void SpreadByMask(PipelineBuilder & P,
+                   ProcessingRateProbabilityDistribution itemsPerOutputUnit) {
+-    if (toSpread->getFieldWidth() < 8) {
++    if (toSpread->getFieldWidth() <= 8) {
+         unsigned streamCount = outputs->getNumElements();
+
+### M063 relop_lt_to_le offset=8354 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..96f59f02 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -182,3 +182,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+     SmallVector<Value *, 16> pendingData(mSelectedStreamCount);
+-    for (unsigned i = 0; i < mSelectedStreamCount; i++) {
++    for (unsigned i = 0; i <= mSelectedStreamCount; i++) {
+         Constant * const streamIndex = ConstantInt::get(streamBase->getType(), i);
+
+### M064 relop_lt_to_le offset=9155 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..f5e740af 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -198,3 +198,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+ 
+-    for (unsigned i = 0; i < mSelectedStreamCount; i++) {
++    for (unsigned i = 0; i <= mSelectedStreamCount; i++) {
+         pendingDataPhi[i] = b.CreatePHI(b.getBitBlockType(), incomingCount);
+
+### M065 relop_lt_to_le offset=9952 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..721bd82e 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -212,3 +212,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+         Constant * zeroes = b.allZeroes();
+-        for (unsigned i = 0; i < mSelectedStreamCount; i++) {
++        for (unsigned i = 0; i <= mSelectedStreamCount; i++) {
+             b.storeOutputStreamBlock("output", b.getInt32(i), blockNoPhi, zeroes);
+
+### M066 relop_lt_to_le offset=10232 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..5bc1732c 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -217,3 +217,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+         pendingOffsetPhi->addIncoming(pendingOffsetPhi, nullMarkers);
+-        for (unsigned i = 0; i < mSelectedStreamCount; i++) {
++        for (unsigned i = 0; i <= mSelectedStreamCount; i++) {
+             pendingDataPhi[i]->addIncoming(pendingDataPhi[i], nullMarkers);
+
+### M067 relop_lt_to_le offset=13366 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..d3d6738c 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -268,3 +268,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+     SmallVector<Value *, 16> sourceData(mSelectedStreamCount);
+-    for (unsigned i = 0; i < mSelectedStreamCount; i++) {
++    for (unsigned i = 0; i <= mSelectedStreamCount; i++) {
+         Constant * const streamIndex = ConstantInt::get(streamBase->getType(), i);
+
+### M068 relop_lt_to_le offset=14609 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..3075e367 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -285,3 +285,3 @@ void StreamExpandKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+     pendingOffsetPhi->addIncoming(newPendingOffset, b.GetInsertBlock());
+-    for (unsigned i = 0; i < mSelectedStreamCount; i++) {
++    for (unsigned i = 0; i <= mSelectedStreamCount; i++) {
+         pendingDataPhi[i]->addIncoming(sourceData[i], b.GetInsertBlock());
+
+### M069 relop_lt_to_le offset=17215 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..37d9fa8b 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -343,3 +343,3 @@ void ElemMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value * c
+     Value * initialPendingData[2];
+-    for (unsigned i = 0; i < 2; i++) {
++    for (unsigned i = 0; i <= 2; i++) {
+         Value * const processedSourceItems = b.getProcessedItemCount(source[i]);
+
+### M070 relop_lt_to_le offset=25448 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..54c591ad 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -502,3 +502,3 @@ void ElemSpreadKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+     Value * const zeroElemVec = b.fwCast(mElemWidth, b.allZeroes());
+-    for (unsigned i = 0; i < mElemWidth; i++) {
++    for (unsigned i = 0; i <= mElemWidth; i++) {
+         b.storeOutputStreamPack("spread", ZERO, b.getSize(i), blockNoPhi, zeroElemVec);
+
+
+### M071 relop_lt_to_le offset=32578 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..e49a8345 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -638,3 +638,3 @@ void StreamMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+     SmallVector<Value *, 16> pendingData2(mSelectedStreamCount);
+-    for (unsigned i = 0; i < mSelectedStreamCount; i++) {
++    for (unsigned i = 0; i <= mSelectedStreamCount; i++) {
+         Constant * const streamIndex = ConstantInt::get(streamBase->getType(), i);
+
+### M072 relop_lt_to_le offset=33290 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..0273d895 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -652,3 +652,3 @@ void StreamMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+     PHINode * pendingOffsetPhi2 = b.CreatePHI(b.getSizeTy(), incomingCount);
+-    SmallVector<PHINode *, 16> pendingDataPhi1(mSelectedStreamCount);
++    SmallVector<=PHINode *, 16> pendingDataPhi1(mSelectedStreamCount);
+     SmallVector<PHINode *, 16> pendingDataPhi2(mSelectedStreamCount);
+
+### M073 relop_lt_to_le offset=33615 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..c76d9549 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -658,3 +658,3 @@ void StreamMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+ 
+-    for (unsigned i = 0; i < mSelectedStreamCount; i++) {
++    for (unsigned i = 0; i <= mSelectedStreamCount; i++) {
+         pendingDataPhi1[i] = b.CreatePHI(b.getBitBlockType(), incomingCount);
+
+### M074 relop_lt_to_le offset=36887 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..153df291 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -715,3 +715,3 @@ void StreamMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+     // Now load and process source streams.
+-    SmallVector<Value *, 16> sourceData1(mSelectedStreamCount);
++    SmallVector<=Value *, 16> sourceData1(mSelectedStreamCount);
+     SmallVector<Value *, 16> sourceData2(mSelectedStreamCount);
+
+### M075 relop_lt_to_le offset=36951 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..7c39ee2a 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -716,3 +716,3 @@ void StreamMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+     SmallVector<Value *, 16> sourceData1(mSelectedStreamCount);
+-    SmallVector<Value *, 16> sourceData2(mSelectedStreamCount);
++    SmallVector<=Value *, 16> sourceData2(mSelectedStreamCount);
+     for (unsigned i = 0; i < mSelectedStreamCount; i++) {
+
+### M076 relop_lt_to_le offset=37027 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..0841815c 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -717,3 +717,3 @@ void StreamMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+     SmallVector<Value *, 16> sourceData2(mSelectedStreamCount);
+-    for (unsigned i = 0; i < mSelectedStreamCount; i++) {
++    for (unsigned i = 0; i <= mSelectedStreamCount; i++) {
+         Constant * const streamIndex = ConstantInt::get(streamBase->getType(), i);
+
+### M077 relop_lt_to_le offset=39392 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..2cfc2f05 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -747,3 +747,3 @@ void StreamMergeKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value *
+     pendingOffsetPhi2->addIncoming(newPendingOffset2, b.GetInsertBlock());
+-    for (unsigned i = 0; i < mSelectedStreamCount; i++) {
++    for (unsigned i = 0; i <= mSelectedStreamCount; i++) {
+         pendingDataPhi1[i]->addIncoming(sourceData1[i], b.GetInsertBlock());
+
+### M078 relop_lt_to_le offset=41563 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..3dfc42b3 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -791,3 +791,3 @@ void FieldDepositKernel::generateMultiBlockLogic(KernelBuilder & b, llvm::Value
+         Value * depositMask = b.loadInputStreamBlock("depositMask", ZERO, blockOffsetPhi);
+-        for (unsigned j = 0; j < mStreamCount; ++j) {
++        for (unsigned j = 0; j <= mStreamCount; ++j) {
+             Value * input = b.loadInputStreamBlock("inputStreamSet", b.getInt32(j), blockOffsetPhi);
+
+### M079 relop_lt_to_le offset=44017 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..64d5fde4 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -840,3 +840,3 @@ void PDEPFieldDepositLogic(KernelBuilder & b, llvm::Value * const numOfStrides,
+     depositMaskPtr = b.CreatePointerCast(depositMaskPtr, fieldPtrTy);
+-    for (unsigned i = 0; i < fieldsPerBlock; i++) {
++    for (unsigned i = 0; i <= fieldsPerBlock; i++) {
+         mask[i] = b.CreateLoad(fieldTy, b.CreateGEP(fiedlTy, depositMaskPtr, b.getInt32(i)));
+
+### M080 relop_lt_to_le offset=44420 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..4c610e59 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -850,3 +850,3 @@ void PDEPFieldDepositLogic(KernelBuilder & b, llvm::Value * const numOfStrides,
+ #endif
+-    for (unsigned j = 0; j < streamCount; ++j) {
++    for (unsigned j = 0; j <= streamCount; ++j) {
+ #ifdef PREFER_FIELD_LOADS_OVER_EXTRACT_ELEMENT
+
+### M081 relop_lt_to_le offset=49729 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..1166bc97 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -956,3 +956,3 @@ void PDEPkernel::generateMultiBlockLogic(KernelBuilder & b, Value * const numOfS
+     Value * buffer = bufferPhi;
+-    for (unsigned i = 0; i < mSwizzleFactor; i++) {
++    for (unsigned i = 0; i <= mSwizzleFactor; i++) {
+ 
+
+### M082 relop_lt_to_le offset=55347 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..9e373686 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1057,3 +1057,3 @@ void UnitInsertionExtractionMasks::generateDoBlockMethod(KernelBuilder & b) {
+     const auto n = b.getInputStreamSet("insertion_mask")->getNumElements();
+-    for (unsigned i = 1; i < n; i++) {
++    for (unsigned i = 1; i <= n; i++) {
+         insertion_mask = b.CreateOr(insertion_mask, b.loadInputStreamBlock("insertion_mask", b.getSize(i), b.getSize(0)));
+
+### M083 relop_lt_to_le offset=58836 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..3073790d 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1126,3 +1126,3 @@ void UnitInsertionSpreadMaskKernel::generateDoBlockMethod(KernelBuilder & b) {
+     const auto n = b.getInputStreamSet("insertion_mask")->getNumElements();
+-    for (unsigned i = 1; i < n; i++) {
++    for (unsigned i = 1; i <= n; i++) {
+         insertion_mask = b.CreateOr(insertion_mask, b.loadInputStreamBlock("insertion_mask", b.getSize(i), b.getSize(0)));
+
+### M084 relop_lt_to_le offset=60112 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..b8ae3981 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1149,3 +1149,3 @@ void UnitInsertionSpreadMaskKernel::generateDoBlockMethod(KernelBuilder & b) {
+     }
+-    for (unsigned blk = 0; blk < 2; blk++) {
++    for (unsigned blk = 0; blk <= 2; blk++) {
+         extract_mask[blk] = b.fwCast(pack_width, extract_mask[blk]);
+
+### M085 relop_lt_to_le offset=60306 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..51692e0a 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1152,3 +1152,3 @@ void UnitInsertionSpreadMaskKernel::generateDoBlockMethod(KernelBuilder & b) {
+         Value * extracted = b.simd_pext(pack_width, mask01, extract_mask[blk]);
+-        for (unsigned i = 0; i < packs_per_block; i++) {
++        for (unsigned i = 0; i <= packs_per_block; i++) {
+             Value * pack_mask = b.CreateExtractElement(extract_mask[blk], i);
+
+### M086 relop_lt_to_le offset=63067 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..8c38c831 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1205,3 +1205,3 @@ void SpreadMaskStep::generatePabloMethod() {
+     pablo::BixNum divided_remaining = bnc.HighBits(remaining_to_insert, remaining_bits);
+-    for (unsigned i = 0; i < remaining_bits; i++) {
++    for (unsigned i = 0; i <= remaining_bits; i++) {
+         std::string vname = "divided_counts[" + std::to_string(i) + "]";
+
+### M087 relop_lt_to_le offset=63563 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..5ec8bde0 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1214,3 +1214,3 @@ void SpreadMaskStep::generatePabloMethod() {
+     pablo::Var * result = getOutputStreamVar("result");
+-    for (unsigned i = 0; i < remaining_bits; i++) {
++    for (unsigned i = 0; i <= remaining_bits; i++) {
+         pb.createAssign(pb.createExtract(result, i), divided_counts[i]);
+
+### M088 relop_lt_to_le offset=68290 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..a65dd994 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1298,3 +1298,3 @@ void InsertionSpreadMaskKernel::wordPrologueLogic(KernelBuilder & b,
+ 
+-    for (unsigned i = 0; i < mMasks.size(); i++) {
++    for (unsigned i = 0; i <= mMasks.size(); i++) {
+         mMasks[i] = indexWord[i];
+
+### M089 relop_lt_to_le offset=72826 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..725b3315 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1376,3 +1376,3 @@ void InsertionSpreadMaskKernel::generateProcessingLogic(KernelBuilder & b,
+     Value * insertAmt = b.getSize(0);
+-    for (unsigned i = 0; i < mBixBits; i++) {
++    for (unsigned i = 0; i <= mBixBits; i++) {
+         Value * theBit = b.CreateAnd(b.CreateLShr(mMasks[i], posInScanWord), sw_ONE);
+
+### M090 relop_lt_to_le offset=79350 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..7e43b1ee 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1493,3 +1493,3 @@ void ByteCombine::generateMultiBlockLogic(KernelBuilder & b, Value * const numOf
+     blockOffsetPhi->addIncoming(sz_ZERO, entry);
+-    for (unsigned i = 0; i < 8; i++) {
++    for (unsigned i = 0; i <= 8; i++) {
+         Value * bytepack1 = b.loadInputStreamPack("byteStream1", sz_ZERO, b.getInt32(i), blockOffsetPhi);
+
+### M091 relop_lt_to_le offset=82574 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..6f6f4924 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1557,3 +1557,3 @@ void ByteReplaceByMask::generateMultiBlockLogic(KernelBuilder & b, Value * const
+     // Output tracking
+-    for (unsigned i = 0; i < fieldWidth; ++i) {
++    for (unsigned i = 0; i <= fieldWidth; ++i) {
+         Value * spreadElem = b.CreateExtractElement(spreadVec, b.getInt32(i));
+
+### M092 relop_lt_to_le offset=84570 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..27292af2 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1599,3 +1599,3 @@ ByteSpreadByMaskKernel::ByteSpreadByMaskKernel(LLVMTypeSystemInterface & b, Stre
+     const auto fieldWidth = byteStream->getFieldWidth();
+-    if (LLVM_UNLIKELY(fieldWidth < 8)) {
++    if (LLVM_UNLIKELY(fieldWidth <= 8)) {
+         report_fatal_error(Twine{getName(), ": does not support field widths under 8-bits"});
+
+### M093 relop_lt_to_le offset=87787 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..62690e3e 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1662,3 +1662,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+         b.SetInsertPoint(packLoopShortCut);
+-        for (unsigned i = 0; i < fieldWidth; ++i) {
++        for (unsigned i = 0; i <= fieldWidth; ++i) {
+             b.storeOutputStreamPack("output", sz_ZERO, b.getSize(i), blockOffsetPhi, b.allZeroes());
+
+### M094 relop_lt_to_le offset=88204 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..7c055fbc 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1671,3 +1671,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+         // Output tracking
+-        for (unsigned i = 0; i < fieldWidth; ++i) {
++        for (unsigned i = 0; i <= fieldWidth; ++i) {
+             Value * spreadElem = b.CreateExtractElement(spreadVec, b.getInt32(i));
+
+### M095 relop_lt_to_le offset=90395 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..78e6f37b 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1709,3 +1709,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+ 
+-        for (unsigned i = 0; i < numElements; ++i) {
++        for (unsigned i = 0; i <= numElements; ++i) {
+             Value * streamIndex = b.getSize(i);
+
+### M096 relop_lt_to_le offset=91912 before='<' after='<='
+diff --git a/lib/kernel/streamutils/pdep_kernel.cpp b/lib/kernel/streamutils/pdep_kernel.cpp
+index 3fc2f54f..f1fbcf0b 100644
+--- a/lib/kernel/streamutils/pdep_kernel.cpp
++++ b/lib/kernel/streamutils/pdep_kernel.cpp
+@@ -1740,3 +1740,3 @@ void ByteSpreadByMaskKernel::generateMultiBlockLogic(KernelBuilder & b, Value *
+         consumedPhi->addIncoming(initialPosition, entry);
+-        for (unsigned i = 0; i < numElements; ++i) {
++        for (unsigned i = 0; i <= numElements; ++i) {
+             PHINode * pPhi = b.CreatePHI(dataVecTy, 2);
+
