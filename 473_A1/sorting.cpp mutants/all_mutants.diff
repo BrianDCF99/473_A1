@@ -1,0 +1,736 @@
+
+Mutant 001
+@@ -86,1 +86,1 @@
+-    unsigned maxLgth = 1<<SeqIndex.size();
++    unsigned maxLgth = 1>>SeqIndex.size();
+
+
+Mutant 002
+@@ -90,1 +90,1 @@
+-    for (unsigned lgth = 3; lgth < maxLgth; lgth++) {
++    for (unsigned lgth = 3; lgth >= maxLgth; lgth++) {
+
+
+
+Mutant 003
+@@ -90,1 +90,1 @@
+-    for (unsigned lgth = 3; lgth < maxLgth; lgth++) {
++    for (unsigned lgth = 3; lgth <= maxLgth; lgth++) {
+
+
+
+Mutant 004
+@@ -90,1 +90,1 @@
+-    for (unsigned lgth = 3; lgth < maxLgth; lgth++) {
++    for (unsigned lgth = 3; lgth == maxLgth; lgth++) {
+
+
+
+Mutant 005
+@@ -90,1 +90,1 @@
+-    for (unsigned lgth = 3; lgth < maxLgth; lgth++) {
++    for (unsigned lgth = 3; lgth != maxLgth; lgth++) {
+
+
+
+Mutant 006
+@@ -91,1 +91,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i > SeqIndex.size(); i++) {
+
+
+
+Mutant 007
+@@ -91,1 +91,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i >= SeqIndex.size(); i++) {
+
+
+
+Mutant 008
+@@ -91,1 +91,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i <= SeqIndex.size(); i++) {
+
+
+
+Mutant 009
+@@ -91,1 +91,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i == SeqIndex.size(); i++) {
+
+
+
+Mutant 010
+@@ -91,1 +91,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i != SeqIndex.size(); i++) {
+
+
+
+Mutant 011
+@@ -102,1 +102,1 @@
+-    if (lgth_offset != 0) {
++    if (lgth_offset > 0) {
+
+
+
+Mutant 012
+@@ -102,1 +102,1 @@
+-    if (lgth_offset != 0) {
++    if (lgth_offset >= 0) {
+
+
+
+Mutant 013
+@@ -102,1 +102,1 @@
+-    if (lgth_offset != 0) {
++    if (lgth_offset < 0) {
+
+
+
+Mutant 014
+@@ -102,1 +102,1 @@
+-    if (lgth_offset != 0) {
++    if (lgth_offset <= 0) {
+
+
+
+Mutant 015
+@@ -102,1 +102,1 @@
+-    if (lgth_offset != 0) {
++    if (lgth_offset == 0) {
+
+
+
+Mutant 016
+@@ -144,1 +144,1 @@
+-    if (SeqIndex.size() > bit_identifying_hi_region) {
++    if (SeqIndex.size() >= bit_identifying_hi_region) {
+
+
+
+Mutant 017
+@@ -144,1 +144,1 @@
+-    if (SeqIndex.size() > bit_identifying_hi_region) {
++    if (SeqIndex.size() < bit_identifying_hi_region) {
+
+
+
+Mutant 018
+@@ -144,1 +144,1 @@
+-    if (SeqIndex.size() > bit_identifying_hi_region) {
++    if (SeqIndex.size() <= bit_identifying_hi_region) {
+
+
+
+Mutant 019
+@@ -144,1 +144,1 @@
+-    if (SeqIndex.size() > bit_identifying_hi_region) {
++    if (SeqIndex.size() == bit_identifying_hi_region) {
+
+
+
+Mutant 020
+@@ -144,1 +144,1 @@
+-    if (SeqIndex.size() > bit_identifying_hi_region) {
++    if (SeqIndex.size() != bit_identifying_hi_region) {
+
+
+
+Mutant 021
+@@ -155,1 +155,1 @@
+-    for (unsigned i = 1; i < mCompareDistance; i*=2) {
++    for (unsigned i = 1; i > mCompareDistance; i*=2) {
+
+
+
+Mutant 022
+@@ -155,1 +155,1 @@
+-    for (unsigned i = 1; i < mCompareDistance; i*=2) {
++    for (unsigned i = 1; i >= mCompareDistance; i*=2) {
+
+
+
+Mutant 023
+@@ -155,1 +155,1 @@
+-    for (unsigned i = 1; i < mCompareDistance; i*=2) {
++    for (unsigned i = 1; i <= mCompareDistance; i*=2) {
+
+
+
+Mutant 024
+@@ -155,1 +155,1 @@
+-    for (unsigned i = 1; i < mCompareDistance; i*=2) {
++    for (unsigned i = 1; i == mCompareDistance; i*=2) {
+
+
+
+Mutant 025
+@@ -155,1 +155,1 @@
+-    for (unsigned i = 1; i < mCompareDistance; i*=2) {
++    for (unsigned i = 1; i != mCompareDistance; i*=2) {
+
+
+
+Mutant 026
+@@ -288,1 +288,1 @@
+-    if (compare_distance > 1) {
++    if (compare_distance >= 1) {
+
+
+
+Mutant 027
+@@ -288,1 +288,1 @@
+-    if (compare_distance > 1) {
++    if (compare_distance < 1) {
+
+
+
+Mutant 028
+@@ -288,1 +288,1 @@
+-    if (compare_distance > 1) {
++    if (compare_distance <= 1) {
+
+
+
+Mutant 029
+@@ -288,1 +288,1 @@
+-    if (compare_distance > 1) {
++    if (compare_distance == 1) {
+
+
+
+Mutant 030
+@@ -288,1 +288,1 @@
+-    if (compare_distance > 1) {
++    if (compare_distance != 1) {
+
+
+
+Mutant 031
+@@ -307,1 +307,1 @@
+-    if (instance_size <=2 ) {
++    if (instance_size >2 ) {
+
+
+
+Mutant 032
+@@ -307,1 +307,1 @@
+-    if (instance_size <=2 ) {
++    if (instance_size >=2 ) {
+
+
+
+Mutant 033
+@@ -307,1 +307,1 @@
+-    if (instance_size <=2 ) {
++    if (instance_size <2 ) {
+
+Mutant 034
+@@ -307,1 +307,1 @@
+-    if (instance_size <=2 ) {
++    if (instance_size ==2 ) {
+
+
+
+Mutant 035
+@@ -307,1 +307,1 @@
+-    if (instance_size <=2 ) {
++    if (instance_size !=2 ) {
+
+
+
+Mutant 036
+@@ -53,1 +53,1 @@
+-    PabloAST * RunEnds = pb.createAnd(Runs, pb.createNot(pb.createLookahead(Runs, 1)));
++    PabloAST * RunEnds = pb.createOR(Runs, pb.createNot(pb.createLookahead(Runs, 1)));
+
+
+
+Mutant 037
+@@ -53,1 +53,1 @@
+-    PabloAST * RunEnds = pb.createAnd(Runs, pb.createNot(pb.createLookahead(Runs, 1)));
++    PabloAST * RunEnds = pb.createAnd(Runs, pb.createNot(pb.createLookahead(Runs, 2)));
+
+
+
+Mutant 038
+@@ -53,1 +53,1 @@
+-    PabloAST * RunEnds = pb.createAnd(Runs, pb.createNot(pb.createLookahead(Runs, 1)));
++    PabloAST * RunEnds = pb.createAnd(Runs, pb.createNot(pb.createLookahead(Runs, 20)));
+
+
+
+Mutant 039
+@@ -53,1 +53,1 @@
+-    PabloAST * RunEnds = pb.createAnd(Runs, pb.createNot(pb.createLookahead(Runs, 1)));
++    PabloAST * RunEnds = pb.createAnd(Runs, pb.createNot(pb.createLookahead(Runs, 200)));
+
+
+
+Mutant 040
+@@ -53,1 +53,1 @@
+-    PabloAST * RunEnds = pb.createAnd(Runs, pb.createNot(pb.createLookahead(Runs, 1)));
++    PabloAST * RunEnds = pb.createAnd(Runs, pb.createNot(pb.createLookahead(Runs, 0)));
+
+
+
+Mutant 041
+@@ -54,1 +54,1 @@
+-       PabloAST * violation = pb.createAnd(bnc.UGT(SortOrder, SortOrder_ahead), pb.createNot(RunEnds));
++       PabloAST * violation = pb.createOR(bnc.UGT(SortOrder, SortOrder_ahead), pb.createNot(RunEnds));
+ 
+
+
+Mutant 042
+@@ -55,1 +55,1 @@
+-    PabloAST * violationInSeq = pb.createAnd(pb.createMatchStar(violation, Runs), RunEnds);
++    PabloAST * violationInSeq = pb.createOR(pb.createMatchStar(violation, Runs), RunEnds); 
+
+
+Mutant 043
+@@ -83,1 +83,1 @@
+-    PabloAST * RunStart = pb.createAnd(Runs, pb.createNot(pb.createAdvance(Runs, 1)));
++    PabloAST * RunStart = pb.createOR(Runs, pb.createNot(pb.createAdvance(Runs, 1)));
+ 
+
+
+Mutant 044
+@@ -94,1 +94,1 @@
+-      PabloAST * atRunStart = pb.createAnd(RunStart, pb.createNot(pb.createLookahead(Runs, lgth)));
++      PabloAST * atRunStart = pb.createOR(RunStart, pb.createNot(pb.createLookahead(Runs, lgth)));
+ 
+
+
+Mutant 045
+@@ -95,1 +95,1 @@
+-        atRunStart = pb.createAnd(bnc.EQ(SeqIndexAhead, lgth-1), atRunStart);
++        atRunStart = pb.createOR(bnc.EQ(SeqIndexAhead, lgth-1), atRunStart);
+ 
+
+
+Mutant 046
+@@ -96,1 +96,1 @@
+-        PabloAST * MisorderedAtStart = pb.createAnd(atRunStart, pb.createLookahead(Misordered, lgth-1), "MisorderedAtStart");
++        PabloAST * MisorderedAtStart = pb.createAnd(atRunStart, pb.createLookahead(Misordered, lgth-1), "MisorderedAtStart");
+ 
+
+
+Mutant 047
+@@ -97,1 +97,1 @@
+-        PabloAST * OrderedRunStart = pb.createAnd(atRunStart, pb.createNot(MisorderedAtStart));
++        PabloAST * OrderedRunStart = pb.createOR(atRunStart, pb.createNot(MisorderedAtStart));
+ 
+
+
+Mutant 048
+@@ -98,1 +98,1 @@
+-        PabloAST * OrderedRun = pb.createAnd(pb.createMatchStar(OrderedRunStart, Runs), Runs);
++        PabloAST * OrderedRun = pb.createOR(pb.createMatchStar(OrderedRunStart, Runs), Runs);
+ 
+
+
+Mutant 049
+@@ -99,1 +99,1 @@
+-        FilteredRuns = pb.createAnd(FilteredRuns, pb.createNot(OrderedRun));
++        FilteredRuns = pb.createOR(FilteredRuns, pb.createNot(OrderedRun));
+ 
+
+
+Mutant 050
+@@ -103,1 +103,1 @@
+-            PabloAST * lgthRun = pb.createAnd(pb.createMatchStar(atRunStart, Runs), Runs);
++            PabloAST * lgthRun = pb.createOR(pb.createMatchStar(atRunStart, Runs), Runs);
+ 
+
+
+Mutant 051
+@@ -101,1 +101,1 @@
+-      unsigned lgth_offset = lgth_ceil - lgth;
++      unsigned lgth_offset = lgth_ceil + lgth;
+ 
+
+
+Mutant 052
+@@ -101,1 +101,1 @@
+-      unsigned lgth_offset = lgth_ceil - lgth;
++      unsigned lgth_offset = lgth_ceil * lgth;
+ 
+
+
+Mutant 053
+@@ -101,1 +101,1 @@
+-      unsigned lgth_offset = lgth_ceil - lgth;
++      unsigned lgth_offset = lgth_ceil / lgth;
+ 
+
+
+Mutant 054
+@@ -101,1 +101,1 @@
+-      unsigned lgth_offset = lgth_ceil - lgth;
++      unsigned lgth_offset = lgth_ceil % lgth;
+ 
+
+
+Mutant 055
+@@ -101,1 +101,1 @@
+-      unsigned lgth_offset = lgth_ceil - lgth;
++      unsigned lgth_offset = 2*lgth_ceil - lgth;
+ 
+
+
+Mutant 056
+@@ -212,1 +212,1 @@
+-    std::vector<PabloAST *> Combined(A.size() + B.size());
++    std::vector<PabloAST *> Combined(A.size() - B.size());
+ 
+
+
+Mutant 057
+@@ -212,1 +212,1 @@
+-    std::vector<PabloAST *> Combined(A.size() + B.size());
++    std::vector<PabloAST *> Combined(A.size() * B.size());
+ 
+
+
+Mutant 058
+@@ -212,1 +212,1 @@
+-    std::vector<PabloAST *> Combined(A.size() + B.size());
++    std::vector<PabloAST *> Combined(A.size() / B.size());
+ 
+
+
+Mutant 059
+@@ -212,1 +212,1 @@
+-    std::vector<PabloAST *> Combined(A.size() + B.size());
++    std::vector<PabloAST *> Combined(A.size() % B.size());
+ 
+
+
+Mutant 060
+@@ -212,1 +212,1 @@
+-    std::vector<PabloAST *> Combined(A.size() + B.size());
++    std::vector<PabloAST *> 2 + Combined(A.size() + B.size());
+ 
+
+,
+Mutant 061
+@@ -253,1 +253,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i > SeqIndex.size(); i++) {
+ 
+
+
+
+Mutant 062
+@@ -253,1 +253,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i >= SeqIndex.size(); i++) {
+ 
+
+
+
+Mutant 063
+@@ -253,1 +253,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i <= SeqIndex.size(); i++) {
+ 
+
+
+
+Mutant 064
+@@ -253,1 +253,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i == SeqIndex.size(); i++) {
+ 
+
+
+
+Mutant 065
+@@ -253,1 +253,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i != SeqIndex.size(); i++) {
+ 
+
+
+
+Mutant 066
+@@ -301,1 +301,1 @@
+-    for (unsigned i = 0; i < ToSort.size(); i++) {
++    for (unsigned i = 0; i > ToSort.size(); i++) {
+ 
+
+
+
+Mutant 067
+@@ -301,1 +301,1 @@
+-    for (unsigned i = 0; i < ToSort.size(); i++) {
++    for (unsigned i = 0; i >= ToSort.size(); i++) {
+ 
+
+
+
+Mutant 068
+@@ -301,1 +301,1 @@
+-    for (unsigned i = 0; i < ToSort.size(); i++) {
++    for (unsigned i = 0; i <= ToSort.size(); i++) {
+ 
+
+
+
+Mutant 069
+@@ -301,1 +301,1 @@
+-    for (unsigned i = 0; i < ToSort.size(); i++) {
++    for (unsigned i = 0; i == ToSort.size(); i++) {
+ 
+
+
+
+Mutant 070
+@@ -301,1 +301,1 @@
+-    for (unsigned i = 0; i < ToSort.size(); i++) {
++    for (unsigned i = 0; i != ToSort.size(); i++) {
+ 
+
+
+
+Mutant 071
+@@ -213,1 +213,1 @@
+-    for (unsigned i = 0; i < A.size(); i++) {
++    for (unsigned i = 0; i > A.size(); i++) {
+ 
+
+
+
+Mutant 072
+@@ -213,1 +213,1 @@
+-    for (unsigned i = 0; i < A.size(); i++) {
++    for (unsigned i = 0; i >= A.size(); i++) {
+ 
+
+
+
+Mutant 073
+@@ -213,1 +213,1 @@
+-    for (unsigned i = 0; i < A.size(); i++) {
++    for (unsigned i = 0; i <= A.size(); i++) {
+ 
+
+
+
+Mutant 074
+@@ -213,1 +213,1 @@
+-    for (unsigned i = 0; i < A.size(); i++) {
++    for (unsigned i = 0; i == A.size(); i++) {
+ 
+
+
+
+Mutant 075
+@@ -213,1 +213,1 @@
+-    for (unsigned i = 0; i < A.size(); i++) {
++    for (unsigned i = 0; i != A.size(); i++) {
+ 
+
+
+
+Mutant 076
+@@ -216,1 +216,1 @@
+-    for (unsigned i = 0; i < B.size(); i++) {
++    for (unsigned i = 0; i > B.size(); i++) {
+ 
+
+
+
+Mutant 077
+@@ -216,1 +216,1 @@
+-    for (unsigned i = 0; i < B.size(); i++) {
++    for (unsigned i = 0; i >= B.size(); i++) {
+ 
+
+
+
+Mutant 078
+@@ -216,1 +216,1 @@
+-    for (unsigned i = 0; i < B.size(); i++) {
++    for (unsigned i = 0; i <= B.size(); i++) {
+ 
+
+
+
+Mutant 079
+@@ -216,1 +216,1 @@
+-    for (unsigned i = 0; i < B.size(); i++) {
++    for (unsigned i = 0; i == B.size(); i++) {
+ 
+
+
+
+Mutant 080
+@@ -216,1 +216,1 @@
+-    for (unsigned i = 0; i < B.size(); i++) {
++    for (unsigned i = 0; i != B.size(); i++) {
+ 
+
+
+
+Mutant 081
+@@ -107,1 +107,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i > SeqIndex.size(); i++) {
+ 
+
+
+
+Mutant 082
+@@ -107,1 +107,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i >= SeqIndex.size(); i++) {
+ 
+
+
+
+Mutant 083
+@@ -107,1 +107,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i <= SeqIndex.size(); i++) {
+ 
+
+
+
+Mutant 084
+@@ -107,1 +107,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i == SeqIndex.size(); i++) {
+ 
+
+
+
+Mutant 085
+@@ -107,1 +107,1 @@
+-    for (unsigned i = 0; i < SeqIndex.size(); i++) {
++    for (unsigned i = 0; i != SeqIndex.size(); i++) {
+ 
+
+
+
+Mutant 086
+@@ -138,1 +138,1 @@
+-    for (unsigned i = 0; i < Basis.size(); i++) {
++    for (unsigned i = 0; i > Basis.size(); i++) {
+ 
+
+
+
+Mutant 087
+@@ -138,1 +138,1 @@
+-    for (unsigned i = 0; i < Basis.size(); i++) {
++    for (unsigned i = 0; i >= Basis.size(); i++) {
+ 
+
+
+
+Mutant 088
+@@ -138,1 +138,1 @@
+-    for (unsigned i = 0; i < Basis.size(); i++) {
++    for (unsigned i = 0; i <= Basis.size(); i++) {
+ 
+
+
+
+Mutant 089
+@@ -138,1 +138,1 @@
+-    for (unsigned i = 0; i < Basis.size(); i++) {
++    for (unsigned i = 0; i == Basis.size(); i++) {
+ 
+
+
+
+Mutant 090
+@@ -138,1 +138,1 @@
+-    for (unsigned i = 0; i < Basis.size(); i++) {
++    for (unsigned i = 0; i != Basis.size(); i++) {
+ 
+
+
+
+Mutant 091
+@@ -179,1 +179,1 @@
+-    for (unsigned i = 0; i < SourceSet.size(); i++) {
++    for (unsigned i = 0; i > SourceSet.size(); i++) {
+ 
+
+
+
+Mutant 092
+@@ -179,1 +179,1 @@
+-    for (unsigned i = 0; i < SourceSet.size(); i++) {
++    for (unsigned i = 0; i >= SourceSet.size(); i++) {
+ 
+
+
+
+Mutant 093
+@@ -179,1 +179,1 @@
+-    for (unsigned i = 0; i < SourceSet.size(); i++) {
++    for (unsigned i = 0; i <= SourceSet.size(); i++) {
+ 
+
+
+
+Mutant 094
+@@ -179,1 +179,1 @@
+-    for (unsigned i = 0; i < SourceSet.size(); i++) {
++    for (unsigned i = 0; i == SourceSet.size(); i++) {
+ 
+
+
+
+Mutant 095
+@@ -179,1 +179,1 @@
+-    for (unsigned i = 0; i < SourceSet.size(); i++) {
++    for (unsigned i = 0; i != SourceSet.size(); i++) {
+ 
+
+
+
+Mutant 096
+@@ -285,1 +285,1 @@
+-    unsigned compare_distance = region_size/2;
++    unsigned compare_distance = region_size;
+ 
+
+
+
+Mutant 097
+@@ -285,1 +285,1 @@
+-    unsigned compare_distance = region_size/2;
++    unsigned compare_distance = region_size+2;
+ 
+
+
+
+Mutant 098
+@@ -285,1 +285,1 @@
+-    unsigned compare_distance = region_size/2;
++    unsigned compare_distance = region_size-2;
+ 
+
+
+
+Mutant 099
+@@ -285,1 +285,1 @@
+-    unsigned compare_distance = region_size/2;
++    unsigned compare_distance = region_size*2;
+ 
+
+
+
+Mutant 100
+@@ -285,1 +285,1 @@
+-    unsigned compare_distance = region_size/2;
++    unsigned compare_distance = region_size%2;
+
+
+
