@@ -1,0 +1,13 @@
+id,tool,source_type,pattern_type,file_type,count,invert,ignore_case,line_numbers
+1,icgrep,inline,literal,no_match,0,0,0,0
+2,icgrep,inline,literal,one_match,0,0,0,0
+3,icgrep,inline,literal,many_match,1,0,0,0
+4,icgrep,file_flag,char_class,one_match,0,1,0,1
+5,icgrep,inline,empty,empty,0,0,0,0
+6,icgrep,file_flag,unicode_property,many_match,0,0,0,0
+7,icgrep,inline,invalid,one_match,0,0,0,0
+8,icgrep,file_flag,literal,missing_path,0,0,0,0
+9,icgrep,inline,char_class,many_match,0,0,1,1
+10,icgrep,file_flag,literal,no_match,1,1,0,0
+11,icgrep,inline,literal,one_match,0,1,1,0
+12,icgrep,file_flag,char_class,empty,0,0,0,0

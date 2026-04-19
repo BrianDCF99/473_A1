@@ -1,0 +1,9 @@
+# Optional ACTS constraints (human-readable starter)
+#
+# 1) Keep line_numbers off when count mode is enabled.
+#    count=1 => line_numbers=0
+#
+# 2) For missing_path, avoid redundant output-format combinations if desired.
+#    file_type=missing_path => line_numbers=0
+#
+# 3) invalid pattern always errors; keep both source types for parser-path coverage.

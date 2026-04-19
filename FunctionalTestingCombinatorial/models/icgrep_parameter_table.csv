@@ -1,0 +1,9 @@
+Parameter,Values
+tool,icgrep
+source_type,"inline,file_flag"
+pattern_type,"literal,char_class,negated_class,anchor_start,anchor_end,alternation,repetition,unicode_property,empty,invalid"
+file_type,"empty,no_match,one_match,many_match,unicode_content,missing_path"
+count,"0,1"
+invert,"0,1"
+ignore_case,"0,1"
+line_numbers,"0,1"
