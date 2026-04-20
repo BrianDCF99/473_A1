@@ -1,0 +1,3 @@
+# Test case for missing Tibetan composition: U+0F71 + U+0F72 should compose to U+0F73
+# This tests if the composition pair is missing from the NFC table
+༱༲
