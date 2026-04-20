@@ -1,0 +1,220 @@
+## files_with_match
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -l Parabix "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt" "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/gamma.txt"`
+- expected exit: 0
+- observed exit: 0
+- result: PASS
+
+stdout:
+```text
+/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt
+```
+
+stderr:
+```text
+```
+
+## files_without_match
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -L ZZZ_NOMATCH "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt" "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/gamma.txt"`
+- expected exit: 1
+- observed exit: 1
+- result: PASS
+
+stdout:
+```text
+/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt
+/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/gamma.txt
+```
+
+stderr:
+```text
+```
+
+## quiet_mode
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -q Parabix "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt"`
+- expected exit: 0
+- observed exit: 0
+- result: PASS
+
+stdout:
+```text
+```
+
+stderr:
+```text
+```
+
+## numbered_max_count
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -n -m=1 Parabix "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt"`
+- expected exit: 0
+- observed exit: 0
+- result: PASS
+
+stdout:
+```text
+1:Parabix alpha
+```
+
+stderr:
+```text
+```
+
+## pattern_file
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -f "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/patterns.txt" "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt"`
+- expected exit: 0
+- observed exit: 0
+- result: PASS
+
+stdout:
+```text
+Parabix alpha
+```
+
+stderr:
+```text
+```
+
+## recursive_include
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -l -r -include=*.txt Parabix "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive"`
+- expected exit: 0
+- observed exit: 1
+- result: FAIL
+
+stdout:
+```text
+icgrep: "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.tx": No such file.
+icgrep: "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/gamma.tx": No such file.
+```
+
+stderr:
+```text
+```
+
+## recursive_exclude_without_match
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -L -r -exclude=*.skip Parabix "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive"`
+- expected exit: 0
+- observed exit: 0
+- result: PASS
+
+stdout:
+```text
+/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/gamma.txt
+```
+
+stderr:
+```text
+```
+
+## stdin_label
+- command: `printf 'Parabix\nother\n' | "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -H -n --label=stdin-label Parabix`
+- expected exit: 0
+- observed exit: 0
+- result: FAIL
+
+stdout:
+```text
+-:1:Parabix
+```
+
+stderr:
+```text
+```
+
+## conflicting_binary_options
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -a -I Parabix "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt"`
+- expected exit: NONZERO
+- observed exit: 2
+- result: PASS
+
+stdout:
+```text
+```
+
+stderr:
+```text
+icgrep ERROR: Conflicting options for binary files.
+
+```
+
+## unsupported_binary_mode
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -U Parabix "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt"`
+- expected exit: NONZERO
+- observed exit: 2
+- result: PASS
+
+stdout:
+```text
+```
+
+stderr:
+```text
+icgrep ERROR: Sorry, -U is not yet supported.
+
+```
+
+## unsupported_byte_offset
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -b Parabix "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt"`
+- expected exit: NONZERO
+- observed exit: 2
+- result: PASS
+
+stdout:
+```text
+```
+
+stderr:
+```text
+icgrep ERROR: Sorry, -b is not yet supported.
+
+```
+
+## unsupported_unix_byte_offsets
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -u Parabix "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt"`
+- expected exit: NONZERO
+- observed exit: 2
+- result: PASS
+
+stdout:
+```text
+```
+
+stderr:
+```text
+icgrep ERROR: Sorry, -u is not yet supported.
+
+```
+
+## unsupported_only_matching
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" -o Parabix "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt"`
+- expected exit: NONZERO
+- observed exit: 2
+- result: PASS
+
+stdout:
+```text
+```
+
+stderr:
+```text
+icgrep ERROR: Sorry, -o is not yet supported.
+
+```
+
+## unsupported_line_buffered
+- command: `"/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/parabix-devel/build-coverage/bin/icgrep" --line-buffered Parabix "/Users/briandelcarpio/Desktop/School/fall-2026/cmpt-473/project/white-box-deliverables/supporting-files/recursive/alpha.txt"`
+- expected exit: NONZERO
+- observed exit: 2
+- result: PASS
+
+stdout:
+```text
+```
+
+stderr:
+```text
+icgrep ERROR: Sorry, -line-buffered is not yet supported.
+
+```
+
+## Summary
+- passes: 12
+- failures: 2
